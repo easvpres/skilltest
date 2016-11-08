@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"  layout:decorator="layout">
+<head>
+<title>Operations</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="pull-left">
+			<h2 style="display: inline">Operations</h2>
+		</div>
+		<div class="pull-right" style="margin-bottom: 10px">
+			<a class="btn btn-default" th:href="@{/newoperation}">Create</a>
+		</div>
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<td>Number</td>
+					<td>From</td>
+					<td>To</td>
+					<td>Amount</td>
+					<td>Timestamp</td>
+					<td>Status</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${operations.empty}">
+					<td colspan="3">No operations</td>
+				</tr>
+				<tr th:each="operation : ${operations}">
+					<td th:text="${operation.number}">1</td>
+					<td><a th:text="${operation.fromBankAccountNumber}" th:href="@{/account/} + ${operation.fromBankAccountNumber}"></a></td>
+					<td><a th:text="${operation.toBankAccountNumber}" th:href="@{/account/} + ${operation.toBankAccountNumber}"></a></td>
+					<td th:text="${operation.amount}">1</td>
+					<td th:text="${#calendars.format(operation.timestamp)}">1</td>
+					<td th:text="${operation.status}">1</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

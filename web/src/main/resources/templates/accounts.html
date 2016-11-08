@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"  layout:decorator="layout">
+<head>
+<title>Accounts</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<h2 >Accounts</h2>
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<td>Number</td>
+					<td>Balance</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${accounts.empty}">
+					<td colspan="3">No accounts</td>
+				</tr>
+				<tr th:each="account : ${accounts}" class='clickable-row' th:data-href="@{/account/} + ${account.number}">
+					<td><a th:text="${account.number}" th:href="@{/account/} + ${account.number}"></a></td>
+					<td th:text="${account.balance}">123</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
